@@ -6,6 +6,16 @@ import dayjs from 'dayjs'
 export class InMemoryCheckInsRepository implements CheckInsRepository {
   public items: CheckIn[] = []
 
+  async findByid(id: String) {
+    const checkIn = this.items.find((item) => item.id === id)
+
+    if (!checkIn) {
+      return null
+    }
+
+    return checkIn
+  }
+
   async findByUserIdOnDate(userId: String, date: Date) {
     // Obtém o início e o fim do dia com base na data fornecida
     const atartOfTheDay = dayjs(date).startOf('date')
@@ -38,6 +48,25 @@ export class InMemoryCheckInsRepository implements CheckInsRepository {
     // Adiciona o check-in à lista de itens
     this.items.push(checkIn)
 
+    return checkIn
+  }
+
+  async countByUserId(userId: string) {
+    return this.items.filter((item) => item.user_id === userId).length
+  }
+
+  async findManyByUserId(userId: string, page: number) {
+    return this.items
+      .filter((item) => item.user_id === userId)
+      .slice((page - 1) * 20, page * 20)
+  }
+
+  async save(checkIn: CheckIn) {
+    const checkOnIndex = this.items.findIndex((item) => item.id === checkIn.id)
+
+    if (checkOnIndex >= 0) {
+      this.items[checkOnIndex] = checkIn
+    }
     return checkIn
   }
 }

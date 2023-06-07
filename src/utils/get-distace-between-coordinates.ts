@@ -5,7 +5,7 @@ export interface Coordinate {
 
 export function getDistanceBetweenCoordinates(
   from: Coordinate,
-  to: Coordinate,
+  to: Coordinate
 ) {
   // Verifica se as coordenadas de origem e destino são iguais
   if (from.latitude === to.latitude && from.longitude === to.longitude) {

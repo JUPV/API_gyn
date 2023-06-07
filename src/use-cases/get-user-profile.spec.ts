@@ -45,7 +45,7 @@ describe('Get User Profile Use Case', () => {
     await expect(() =>
       sut.execute({
         userId: 'usuario-nao-existe',
-      }),
+      })
     ).rejects.toBeInstanceOf(ResourceNotFoundError)
   })
 })
