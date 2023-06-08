@@ -20,7 +20,7 @@ describe('Fatch Nearby Gyms Use case', () => {
   })
 
   // testes: it
-  it('should be able to fetch nearby gyms', async () => {
+  it('should be able to list nearby gyms', async () => {
     await gymsRepository.create({
       title: 'academia longe',
       description: null,
